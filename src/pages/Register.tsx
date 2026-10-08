@@ -36,7 +36,7 @@ export default function Register() {
   }
 
   return (
-    <main className="card">
+    <main className="card auth">
       <h1>Регистрация</h1>
       <form onSubmit={onSubmit}>
         <Field label="Имя" name="name" value={form.name} onChange={set('name')} error={errors.name?.[0]} autoComplete="name" />

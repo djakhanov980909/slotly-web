@@ -31,7 +31,7 @@ export default function Login() {
   }
 
   return (
-    <main className="card">
+    <main className="card auth">
       <h1>Вход</h1>
       <form onSubmit={onSubmit}>
         <Field label="Email" name="email" type="email" value={email} onChange={setEmail} autoComplete="email" />

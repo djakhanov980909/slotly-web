@@ -2,10 +2,12 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { api, ApiError, tokenStorage } from '../api/client';
 import type { AuthResponse, User } from '../api/types';
 import { AuthContext, type AuthState } from './context';
+import { useQueryClient } from '@tanstack/react-query';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(() => tokenStorage.get() !== null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!tokenStorage.get()) {
@@ -43,7 +45,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await api('/logout', { method: 'POST' });
       } finally {
         tokenStorage.clear();
-        setUser(null);
+        queryClient.clear();
+        setUser(null);        
       }
     },
   };
